@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
     }
     private void MoveObject(Vector2 movement)
     {
+        //Debug
+        Debug.Log("TEST: " + movement);
         //MOVE OBJECT
         rig.velocity = movement;
     }
