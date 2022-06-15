@@ -12,6 +12,7 @@ public class PowerUpManager : MonoBehaviour
     public Transform spawnArea;
     public Vector2 powerUpAreaMin;
     public Vector2 powerUpAreaMax;
+    public int DeleteInterval = 3;
 
 
 
