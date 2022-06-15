@@ -36,5 +36,10 @@ public class PUSpeedUPController : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
+        if (timer > manager.DeleteInterval)
+        {
+            Debug.Log("OK");
+            manager.RemovePowerUp(gameObject);
+        }
     }
 }
