@@ -9,6 +9,12 @@ public class BalController : MonoBehaviour
     //deklarasi vector2d untuk speed
     public Vector2 speed;
     public Vector2 resetPosition;
+
+
+    public void ActivatePUSpeedUp(float magnitude)
+    {
+        rig.velocity *= magnitude;
+    }
     // Start is called before the first frame update
     private void Start()
     {
