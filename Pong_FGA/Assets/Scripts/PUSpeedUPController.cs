@@ -6,24 +6,19 @@ public class PUSpeedUPController : MonoBehaviour
 {
     public PowerUpManager manager;
     public Collider2D ball;
-    public float magnitude;
+    public float magnitude = 3f;
     private float timer;
 
 
     private void OnTriggerEnter2D(Collider2D collison)
     {
-        if (collison == ball)
+        if (collison == ball && !manager.activationBallSpeed)
         {
-            //speed up the ball
-            ball.GetComponent<BalController>().ActivatePUSpeedUp(magnitude);
+            manager.activationBallSpeed = true;
+            manager.ballMagnitude = magnitude;
+            ball.GetComponent<BalController>().ActivationPUSpeedUp(magnitude);
             manager.RemovePowerUp(gameObject);
         }
-        
-        if (timer == 0.5)
-        {
-            //remove up the 
-            manager.RemovePowerUp(gameObject);
-        }   
 
     }
     // Start is called before the first frame update
@@ -38,7 +33,7 @@ public class PUSpeedUPController : MonoBehaviour
         timer += Time.deltaTime;
         if (timer > manager.DeleteInterval)
         {
-            Debug.Log("OK");
+
             manager.RemovePowerUp(gameObject);
         }
     }

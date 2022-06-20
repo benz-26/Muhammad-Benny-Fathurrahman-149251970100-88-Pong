@@ -7,26 +7,30 @@ using UnityEngine;
 public class MainMenuController : MonoBehaviour
 {
 
+
+    //ke playgame
     public void PlyaGame()
     {
         SceneManager.LoadScene("Game");
         Debug.Log("Created By Muhammad Benny Fathurrahman-149251970100-88");
     }
-    // Start is called before the first frame update
-    void Start()
+
+    //ke credit
+    public void Credit()
     {
-        
+        SceneManager.LoadScene("Credit");
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void MainMenu()
     {
-        
+        SceneManager.LoadScene("Main Menu");
     }
 
-    //button author
-    public void OpenAuthor()
+
+    public void Quit()
     {
-        Debug.Log("Created By Muhammad Benny Fathurrahman-149251970100-88");
+        Debug.Log("QUIT!");
+        Application.Quit();
     }
 }

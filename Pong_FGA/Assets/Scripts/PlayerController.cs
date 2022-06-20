@@ -10,10 +10,13 @@ public class PlayerController : MonoBehaviour
     //deklarasi keycode biar bisa diganti
     public KeyCode upKey;
     public KeyCode downKey;
-
-    //deklarasi vector2d untuk speed
     public int speed;
-
+    public float timer;
+    
+    public void ActivatePUSpeedUp(float magnitude)
+    {
+        rig.velocity *= 2;
+    }
     // Start is called before the first frame update
     private void Start()
     {
@@ -41,16 +44,35 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(downKey))
         {
             // ke bawah 
-            return Vector3.down * speed;
+            return Vector2.down * speed;
         }
 
         return Vector2.zero;
     }
     private void MoveObject(Vector2 movement)
     {
-        //Debug
-        Debug.Log("TEST: " + movement);
+        
         //MOVE OBJECT
         rig.velocity = movement;
+    }
+
+    public void SpeedUpPad()
+    {
+        speed *= 2;
+    }
+
+    public void ResetSpeedPad()
+    {
+        speed /= 2;
+    }
+
+    public void ScaleUp(GameObject paddle)
+    {
+        paddle.transform.localScale += new Vector3(0, paddle.transform.localScale.y, 0);
+    }
+
+    public void ScaleDown(GameObject paddle)
+    {
+        paddle.transform.localScale -= new Vector3(0, paddle.transform.localScale.y / 2, 0);
     }
 }

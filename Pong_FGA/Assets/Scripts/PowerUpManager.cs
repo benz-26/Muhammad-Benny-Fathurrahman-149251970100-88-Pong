@@ -7,14 +7,30 @@ public class PowerUpManager : MonoBehaviour
 
     public int maxPowerUpAmount;
     public int spawnInterval;
-    public int destroyInterval;
-    private float timer;
+
+    [SerializeField]private float timer;
     public Transform spawnArea;
     public Vector2 powerUpAreaMin;
     public Vector2 powerUpAreaMax;
-    public int DeleteInterval = 3;
+    public int DeleteInterval;
 
+    public GameObject ball;
+    public float ballMagnitude;
+    private float BallSpeedDuration;
+    public bool activationBallSpeed;
 
+    public GameObject PaddleKiri;
+    public GameObject PaddleKanan;
+
+    float durationScaleUpPaddleLeft ;
+    float durationSpeedUpPaddleLeft ;
+    float durationScaleUpPaddleRight ;
+    float durationSpeedUpPaddleRight ;
+
+    public bool activationScaleUpPaddleLeft = false;
+    public bool activationSpeedUpPaddleLeft = false;
+    public bool activationScaleUpPaddleRight = false;
+    public bool activationSpeedUpPaddleRight = false;
 
     private List<GameObject> powerUpList;
     public List<GameObject> powerUpTemplateList;
@@ -36,7 +52,72 @@ public class PowerUpManager : MonoBehaviour
         {
             GenerateRandomPowerUp();
             timer -= spawnInterval;
-        }     
+        }
+
+
+
+        if (activationBallSpeed == true)
+        {
+            if (BallSpeedDuration >= 5)
+            {
+                ball.GetComponent<BalController>().DeactivationPUSpeedUp(ballMagnitude);
+                activationBallSpeed = false;
+                BallSpeedDuration -= 5;
+            }
+            BallSpeedDuration += Time.deltaTime;
+        }
+
+
+
+        if (activationScaleUpPaddleLeft == true)
+        {
+            if (durationScaleUpPaddleLeft >= 5)
+            {
+                PaddleKiri.GetComponent<PlayerController>().ScaleDown(PaddleKiri);
+                activationScaleUpPaddleLeft = false;
+                durationScaleUpPaddleLeft -= 5;
+            }
+            durationScaleUpPaddleLeft += Time.deltaTime;
+        }
+
+
+
+        if (activationSpeedUpPaddleLeft == true)
+        {
+            if (durationSpeedUpPaddleLeft >= 5)
+            {
+                PaddleKiri.GetComponent<PlayerController>().ResetSpeedPad();
+                activationSpeedUpPaddleLeft = false;
+                durationSpeedUpPaddleLeft -= 5;
+            }
+            durationSpeedUpPaddleLeft += Time.deltaTime;
+        }
+
+
+
+        if (activationScaleUpPaddleRight == true)
+        {
+            if (durationScaleUpPaddleRight >= 5)
+            {
+                PaddleKanan.GetComponent<PlayerController>().ScaleDown(PaddleKanan);
+                activationScaleUpPaddleRight = false;
+                durationScaleUpPaddleRight -= 5;
+            }
+            durationScaleUpPaddleRight += Time.deltaTime;
+        }
+
+
+
+        if (activationSpeedUpPaddleRight == true)
+        {
+            if (durationSpeedUpPaddleRight >= 5)
+            {
+                PaddleKanan.GetComponent<PlayerController>().ResetSpeedPad();
+                activationSpeedUpPaddleRight = false;
+                durationSpeedUpPaddleRight -= 5;
+            }
+            durationSpeedUpPaddleRight += Time.deltaTime;
+        }
     }
 
     public void GenerateRandomPowerUp()
